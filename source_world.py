@@ -45,8 +45,11 @@ class nengoSource(object):
         init_source=self.source
         dt=self.dt
         def update(t):
-            self.source[0]=np.sin(-t/self.max_time)
-            self.source[1]=np.cos(-t/self.max_time)
+            if t >= 0.8 * self.max_time:
+                pass
+            else:
+                self.source[0]=np.sin(1/2 * np.pi * -t/self.max_time)
+                self.source[1]=np.cos(1/2 * np.pi* -t/self.max_time)
             return (self.source)
         return nengo.Node(update)
         
@@ -112,6 +115,13 @@ class nengoSource(object):
                     self.last_trail_time = t
             return x
 
+        return nengo.Node(update, size_in=1)
+    def avoid_block(self):
+        def update(t,x): 
+            if self.x < 0.1 and self.y < 0.1: 
+                return -0.1 
+            else: 
+                return x
         return nengo.Node(update, size_in=1)
     def make_position(self):
         def update(t):

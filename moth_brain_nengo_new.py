@@ -66,10 +66,10 @@ class MothBrainNengo(nengo.Network):
             
             ### Recurrent inhibition ###
             self.PBN_r_slow = nengo.Ensemble(N,1, max_rates = nengo.dists.Uniform(20, 100),
-                        intercepts = nengo.dists.Uniform(0,1),
+                        intercepts = nengo.dists.Uniform(-0.4,0),
                         encoders = [[1]]*N) 
             self.PBN_l_slow = nengo.Ensemble(N,1, max_rates = nengo.dists.Uniform(20, 100),
-                        intercepts = nengo.dists.Uniform(0,1),
+                        intercepts = nengo.dists.Uniform(-0.4,0),
                         encoders = [[1]]*N)
                         
             self.PBN_r_fast = nengo.Ensemble(N,1, max_rates = nengo.dists.Uniform(100, 200),
